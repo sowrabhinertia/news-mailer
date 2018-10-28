@@ -1,0 +1,28 @@
+<html>
+<head>
+  <title>profile</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myapp" ng-controller="mycon">
+<div ng-repeat="x in login">{{ x.name }}</div>
+</div>
+
+</div>
+</body>
+<script>
+var app=angular.module("myapp",[]);
+app.controller("mycon",function($scope,$http){
+  $http.get("/display").then(function(data){
+    $scope.login=data;
+  });
+});
+</script>
+</html>

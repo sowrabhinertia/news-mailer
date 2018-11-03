@@ -13,6 +13,7 @@ app.use(express.static(publicDir));
 
 app.get('/',function(req,res){
   res.sendfile("index1.html");
+  console.log("djdjdjd")
 })
 app.post("/subscribe",function(req,res){
   console.log(req.body);
@@ -43,8 +44,8 @@ app.post("/subscribe",function(req,res){
      }
     console.log("database connected");
     var sql1 = "INSERT INTO register (name, eid,password) VALUES ('"+req.body.name+"', '"+req.body.email+"','"+req.body.password+"') ";
-    var sql2 = "INSERT INTO categories (eid,types) VALUES ('"+req.body.email+"', '"+req.body.types+"') ";
-    var sql3 = "INSERT INTO source (source_name) VALUES ('"+req.body.source+"')";
+    var sql2 = "INSERT INTO categories (eid,types) VALUES ('"+req.body.email+"','"+req.body.types+"') ";
+    var sql3 = "INSERT INTO source (eid,source_name) VALUES ('"+req.body.email+"','"+req.body.source+"')";
 
     con.query(sql1, function (err, result) {
       if (err){

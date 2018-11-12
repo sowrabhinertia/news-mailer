@@ -271,13 +271,13 @@ function done(){
 
   var schedule=require("node-schedule")
 
-  var j = schedule.scheduleJob('00 12 * * *', function run(){
-  toi_trending().delay(8000)
-      .then(toi_sports).delay(8000)
-      .then(ndtv_trending).delay(8000)
-      .then(ndtv_sports).delay(8000)
-      .then(it_trending).delay(8000)
-      .then(it_sports).delay(8000)
+  var j = schedule.scheduleJob('53 16 * * *', function run(){
+  toi_trending().delay(11000)
+      .then(toi_sports).delay(11000)
+      .then(ndtv_trending).delay(11000)
+      .then(ndtv_sports).delay(11000)
+      .then(it_trending).delay(11000)
+      .then(it_sports).delay(11000)
       .then(done)
       .catch(Promise.TimeoutError, function(e) {
           console.log('error', e);

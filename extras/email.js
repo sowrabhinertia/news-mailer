@@ -1,31 +1,7 @@
 var nodemailer = require('nodemailer');
 const mysql=require("mysql");
 
-function email(x,y){
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'top.news.mailer@gmail.com',
-    pass: 'starsullal'
-  }
-});
 
-            const mailOptions = {
-              from: 'sowrabhsullal@gmail.com',
-              to:x,
-              subject: 'Top ten news',
-              text: y
-            };
-            transporter.sendMail(mailOptions, function(error, info){
-              if (error) {
-                console.log(error.message);
-              } else {
-                console.log('Email sent: ' + info.response);
-              }
-            });
-}
-
-function lists (){
   var con = mysql.createConnection({
     host: "localhost",
     user: "sowrabhinertia",
@@ -49,6 +25,27 @@ function lists (){
   for(var column in result[row]){
    x=result[row][column]+",";
     console.log(x);
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'top.news.mailer@gmail.com',
+        pass: 'starsullal'
+      }
+    });
+
+                const mailOptions = {
+                  from: 'top.news.mailer@gmail.com',
+                  to:x,
+                  subject: 'Top ten news',
+                  text: "hello"
+                };
+                transporter.sendMail(mailOptions, function(error, info){
+                  if (error) {
+                    console.log(error.message);
+                  } else {
+                    console.log('Email sent: ' + info.response);
+                  }
+                });
   }
 }
 con.end();
@@ -56,8 +53,4 @@ console.log("connection removed"); }
 else{
   console.log("no subscribers");
 }
-   y="heallala"
-  email(x,y)
 });
-}
-lists();

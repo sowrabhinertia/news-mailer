@@ -2,7 +2,7 @@ var express=require('express');
 var mysql=require('mysql')
 var schedule=require("node-schedule")
 
-var j = schedule.scheduleJob('30 12 * * *', function del(){
+var j = schedule.scheduleJob('30 18 * * *', function del(){
   var con = mysql.createConnection({
     host: "localhost",
     user: "sowrabhinertia",

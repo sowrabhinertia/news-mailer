@@ -12,10 +12,10 @@ var publicDir = require('path').join(__dirname,'/public');
 app.use(express.static(publicDir));
 
 app.get('/',function(req,res){
-  res.sendfile("index1.html");
-  console.log("djdjdjd")
+  res.sendfile("index.html");
 })
-app.post("/subscribe",function(req,res){
+
+app.post("/reg_toi",function(req,res){
   console.log(req.body);
   console.log("inserting into database");
   var con = mysql.createConnection({
@@ -30,78 +30,160 @@ app.post("/subscribe",function(req,res){
       console.error(err.message);
       return;
     }
-     name=req.body.name;
-     email=req.body.email;
-     source=req.body.source;
-     if(source == "Times of india" ){
-       var sid= 'toi_1' ;
-     }
-     else if(source == "india today" ){
-       var sid= 'it_1' ;
-     }
-     else if(source == "ndtv" ){
-       var sid= 'ndtv_1' ;
-     }
     console.log("database connected");
     var sql1 = "INSERT INTO register (name, eid,password) VALUES ('"+req.body.name+"', '"+req.body.email+"','"+req.body.password+"') ";
     var sql2 = "INSERT INTO categories (eid,types) VALUES ('"+req.body.email+"','"+req.body.types+"') ";
-    var sql3 = "INSERT INTO source (eid,source_name) VALUES ('"+req.body.email+"','"+req.body.source+"')";
-
+    var sql3 = "INSERT INTO source (eid,source_name) VALUES ('"+req.body.email+"','Times of india')";
+   var sql4 = "INSERT INTO phone (eid,phone_number) VALUES ('"+req.body.email+"','"+req.body.phone+"')";
     con.query(sql1, function (err, result) {
       if (err){
         console.error(err.message);
         return;
       }
-console.log("register filled")
+console.log("inserted into register");
     });
     con.query(sql2,function (err, result) {
       if (err){
         console.error(err.message);
         return;
       }
-       console.log("categories filled");
+       console.log("inserted into categories");
     });
     con.query(sql3, function (err, result) {
       if (err){
         console.error(err.message);
         return;
       }
-      console.log("source filled");
+      console.log("inserted into source");
+
+    });
+    con.query(sql4, function (err, result) {
+      if (err){
+        console.error(err.message);
+        return;
+      }
+      console.log("inserted into phone");
       alert("You have subscribed sucessfully "+req.body.name);
        con.end();
        console.log("connection removed");
 
     });
     });
-    //res.redirect('news.html');
+    //res.redirect('index.html');
 });
-app.get("/display",function(req,res){
+
+app.post("/reg_ndtv",function(req,res){
+  console.log(req.body);
+  console.log("inserting into database");
   var con = mysql.createConnection({
     host: "localhost",
     user: "sowrabhinertia",
     password: "starullal",
-    database: "news"
+    database: "news1",
+    multipleStatements: true
   });
   con.connect(function(err) {
-  if (err){
-    console.error(err.message);
-    return;
-  }
-  console.log("database accessible");
-  console.log(name);
-  con.query(" SELECT* FROM login WHERE name=('"+name+"') AND email=('"+email+"') AND source=('"+source+"') ", function (err, data) {
-    if (err) {
-      console.log("hello error");
+    if (err){
       console.error(err.message);
-      throw err;
+      return;
     }
-    else{
-    console.log(data);
-    res.send(data);
-  }
-  con.end();
+    console.log("database connected");
+    var sql1 = "INSERT INTO register (name, eid,password) VALUES ('"+req.body.name+"', '"+req.body.email+"','"+req.body.password+"') ";
+    var sql2 = "INSERT INTO categories (eid,types) VALUES ('"+req.body.email+"','"+req.body.types+"') ";
+    var sql3 = "INSERT INTO source (eid,source_name) VALUES ('"+req.body.email+"','ndtv')";
+    var sql4 = "INSERT INTO phone (eid,phone_number) VALUES ('"+req.body.email+"','"+req.body.phone+"')";
+    con.query(sql1, function (err, result) {
+      if (err){
+        console.error(err.message);
+        return;
+      }
+console.log("inserted into register");
+    });
+    con.query(sql2,function (err, result) {
+      if (err){
+        console.error(err.message);
+        return;
+      }
+       console.log("inserted into categories");
+    });
+    con.query(sql3, function (err, result) {
+      if (err){
+        console.error(err.message);
+        return;
+      }
+      console.log("inserted into source");
+
+    });
+    con.query(sql4, function (err, result) {
+      if (err){
+        console.error(err.message);
+        return;
+      }
+      console.log("inserted into phone");
+      alert("You have subscribed sucessfully "+req.body.name);
+       con.end();
+       console.log("connection removed");
+
+    });
+    });
+    //res.redirect('index.html');
 });
-});
+
+app.post("/reg_it",function(req,res){
+  console.log(req.body);
+  console.log("inserting into database");
+  var con = mysql.createConnection({
+    host: "localhost",
+    user: "sowrabhinertia",
+    password: "starullal",
+    database: "news1",
+    multipleStatements: true
+  });
+  con.connect(function(err) {
+    if (err){
+      console.error(err.message);
+      return;
+    }
+    console.log("database connected");
+    var sql1 = "INSERT INTO register (name, eid,password) VALUES ('"+req.body.name+"', '"+req.body.email+"','"+req.body.password+"') ";
+    var sql2 = "INSERT INTO categories (eid,types) VALUES ('"+req.body.email+"','"+req.body.types+"') ";
+    var sql3 = "INSERT INTO source (eid,source_name) VALUES ('"+req.body.email+"','india today')";
+    var sql4 = "INSERT INTO phone (eid,phone_number) VALUES ('"+req.body.email+"','"+req.body.phone+"')";
+    con.query(sql1, function (err, result) {
+      if (err){
+        console.error(err.message);
+        return;
+      }
+console.log("inserted into register");
+    });
+    con.query(sql2,function (err, result) {
+      if (err){
+        console.error(err.message);
+        return;
+      }
+       console.log("inserted into categories");
+    });
+    con.query(sql3, function (err, result) {
+      if (err){
+        console.error(err.message);
+        return;
+      }
+      console.log("inserted into source");
+
+    });
+    con.query(sql4, function (err, result) {
+      if (err){
+        console.error(err.message);
+        return;
+      }
+      console.log("inserted into phone");
+      alert("You have subscribed sucessfully "+req.body.name);
+       con.end();
+       console.log("connection removed");
+
+    });
+    });
+    //res.redirect('index.html');
 });
 app.listen(3000);
 console.log("server running on port 3000");
